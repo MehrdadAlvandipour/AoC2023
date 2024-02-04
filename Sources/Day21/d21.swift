@@ -44,23 +44,23 @@ struct Day21 {
         let m: Garden  = Garden.from(lines: lines, zero: "_")
         let S = findS(m)
         var q: Deque<(UInt, Int, Int)> = [(0, Int(S.0), Int(S.1))]
-        var visited: Set<Pairs> = []
-        var evens: Set<Pairs> = []
-        var odds: Set<Pairs> = []
+        var visited: Set<Pair> = []
+        var evens: Set<Pair> = []
+        var odds: Set<Pair> = []
         while !q.isEmpty {
             let (step, r, c) = q.popFirst()!
             if step % 2 == 0 {
-                evens.insert(Pairs(r,c))
+                evens.insert(Pair(r,c))
             } else {
-                odds.insert(Pairs(r,c))
+                odds.insert(Pair(r,c))
             }
             if step == limit { continue }
             for (nr,nc) in news(r, c) {
                 if m[UInt(mod(nr , 131)), UInt(mod(nc , 131))] == "#" ||
-                    visited.contains(Pairs(nr,nc)) {
+                    visited.contains(Pair(nr,nc)) {
                     continue
                 }
-                visited.insert(Pairs(nr,nc))
+                visited.insert(Pair(nr,nc))
                 q.append((step+1, nr, nc))
             }
         }
@@ -122,7 +122,7 @@ struct Day21 {
         return a*(x*x) + b*x + c
     }
     
-    struct Pairs: Hashable {
+    struct Pair: Hashable {
         let r: Int
         let c: Int
         
