@@ -148,10 +148,10 @@ struct Day21 {
     func singleMap(_ limit: Int) {
         var m: Garden  = Garden.from(lines: lines, zero: "_")
         let S = findS(m)
-        var stack: Deque<(UInt, (UInt, UInt))> = [(0, S)]
+        var q: Deque<(UInt, (UInt, UInt))> = [(0, S)]
         m[S.0, S.1] = "."
-        while !stack.isEmpty {
-            let (step, cur) = stack.popFirst()!
+        while !q.isEmpty {
+            let (step, cur) = q.popFirst()!
             if m[cur.0, cur.1] != "." { continue }
             m[cur.0, cur.1] = Character(String(step % 2))
             if step >= limit {
@@ -160,7 +160,7 @@ struct Day21 {
             
             for (r,c) in m.ngbrCoordinate(cur.0, cur.1) {
                 if m[r,c]! == "." { //
-                    stack.append((step+1, (r,c)))
+                    q.append((step+1, (r,c)))
                 }
             }
         }
