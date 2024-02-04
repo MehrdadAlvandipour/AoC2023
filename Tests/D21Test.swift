@@ -25,7 +25,7 @@ final class D21Tests: XCTestCase {
 //"""
     func testExample() throws {
         let adventDay = Day21(input: input1)
-        XCTAssertEqual(adventDay.partOne(), 16)
+        XCTAssertEqual(adventDay.partOneSolved(6), 16)
     }
 
 //    func testExample2() throws {
