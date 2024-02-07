@@ -94,24 +94,26 @@ struct Day22 {
             return count
         }
         
-        // TODO PartTwo
         func chain(_ i: Int) -> Int {
-            var ans = 0
             let cur = bricks[i]
+            var destroyed: [Brick] = []
+            var desVol: Set<Vec3> = cur.vol
+            
             if occupied.subtracting(cur.vol).intersection(cur.move(by: 1).vol).isEmpty { return 0 }
             for j in (i+1)..<bricks.indices.upperBound {
                 let upperBrick = bricks[j]
-                if upperBrick.move(by: -1).vol.intersection(cur.vol).isEmpty {
+                if upperBrick.move(by: -1).vol.intersection(desVol).isEmpty {
                     continue
                 }
-                if occupied.subtracting(cur.vol)
+                if occupied.subtracting(desVol)
                     .subtracting(upperBrick.vol)
                     .intersection(upperBrick.move(by: -1).vol)
                     .isEmpty {
-                    ans += chain(j) + 1 // Wrong
+                    destroyed.append(upperBrick)
+                    desVol.formUnion(upperBrick.vol)
                 }
             }
-            return ans
+            return destroyed.count
         }
         
         func fallenBricks() -> Int {
