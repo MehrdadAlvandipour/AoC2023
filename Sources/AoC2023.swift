@@ -4,7 +4,7 @@ import Foundation
 public struct AoC2023 {
     public var text = "Hello, World!"
     public static func main() {
-        let adventDay = Day22()
+        let adventDay = Day23()
         print(adventDay.partOne())
         print(adventDay.partTwo())
     }
