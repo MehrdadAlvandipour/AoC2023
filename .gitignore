@@ -1,3 +1,4 @@
+./Sources/Day25/.env/
 .DS_Store
 /.build
 /Packages
@@ -8,3 +9,6 @@ DerivedData/
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .netrc
 input.txt
+.env/
+__pycache__/
+*.py
